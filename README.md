@@ -1,5 +1,11 @@
 # 🛒 AI Shopping Assistant
 
+<p align="center">
+  <img src="assets/banner.png" alt="AI Shopping Assistant Banner" width="100%">
+</p>
+
+<p align="center">
+
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![Groq](https://img.shields.io/badge/LLM-Groq-purple)
 ![LangChain](https://img.shields.io/badge/Framework-LangChain-green)
@@ -7,71 +13,101 @@
 ![Docker](https://img.shields.io/badge/Container-Docker-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-An AI-powered shopping assistant that helps users make informed purchasing decisions by comparing products, analyzing customer reviews, and generating personalized recommendations using Large Language Models (LLMs).
+</p>
+
+<p align="center">
+<b>AI-powered shopping assistant that compares products, analyzes customer reviews, and delivers personalized recommendations using Groq, LangChain, and Streamlit.</b>
+</p>
 
 ---
 
-# ✨ Features
+## ✨ Features
 
-* 🔍 Search products from an external product API
-* ⚖️ Compare multiple products using AI
-* 📝 AI-powered customer review analysis
-* ✅ Extract Pros & Cons from reviews
-* 🤖 Personalized product recommendations
+* 🔍 Search products from a product API
+* ⚖️ AI-powered product comparison
+* 📝 Customer review summarization
+* ✅ Automatic Pros & Cons extraction
+* 📊 Sentiment analysis
+* 🤖 Personalized AI recommendations
 * 🧠 End-to-end shopping pipeline
-* 🎨 Professional Streamlit interface
-* 🐳 Dockerized for easy deployment
+* 🎨 Professional Streamlit UI
+* 🐳 Docker support
 
 ---
 
-# 📸 Demo
+# 🎬 Demo
 
-> Add screenshots or a short demo GIF here.
+<p align="center">
+<img src="assets/demo.gif" width="90%">
+</p>
 
-Example:
+---
 
-```
-assets/demo.gif
-```
+# 📸 Screenshots
 
-or
+| Home                 | Product Comparison         |
+| -------------------- | -------------------------- |
+| ![](assets/home.png) | ![](assets/comparison.png) |
 
-```
-assets/homepage.png
+| Review Analysis        | Recommendation                 |
+| ---------------------- | ------------------------------ |
+| ![](assets/review.png) | ![](assets/recommendation.png) |
+
+---
+
+# 🏗 Architecture
+
+```text
+                           User
+
+                             │
+
+                             ▼
+
+                     Streamlit UI
+
+                             │
+
+                             ▼
+
+                shopping_pipeline.py
+
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+
+ Product Search   Review Analysis   Comparison
+
+        └──────────────┼──────────────┘
+                       ▼
+
+            Recommendation Engine
+
+                       ▼
+
+                 Groq LLM (LangChain)
 ```
 
 ---
 
-# 🏗️ Architecture
+# ⚡ Workflow
 
-```
-                    User
-
-                      │
-
-                      ▼
-
-               Streamlit UI
-
-                      │
-
-                      ▼
-
-           shopping_pipeline.py
-
-        ┌────────────┼────────────┐
-        ▼            ▼            ▼
-
- Product Search  Review AI  Product Compare
-
-        └────────────┼────────────┘
-                     ▼
-
-        Recommendation Engine
-
-                     ▼
-
-                Groq LLM
+```text
+Search Product
+        │
+        ▼
+Fetch Products
+        │
+        ▼
+Analyze Reviews
+        │
+        ▼
+Compare Products
+        │
+        ▼
+Generate Recommendation
+        │
+        ▼
+Display Best Product
 ```
 
 ---
@@ -80,13 +116,13 @@ assets/homepage.png
 
 | Category         | Technology         |
 | ---------------- | ------------------ |
-| Language         | Python             |
+| Language         | Python 3.11        |
 | LLM              | Groq               |
 | Framework        | LangChain          |
 | Frontend         | Streamlit          |
 | Containerization | Docker             |
 | Prompting        | Prompt Engineering |
-| Data             | JSON               |
+| Data Format      | JSON               |
 
 ---
 
@@ -103,7 +139,17 @@ ai-shopping-assistant/
 │── requirements.txt
 │── Dockerfile
 │── .dockerignore
+│── .env.example
 │── README.md
+│── LICENSE
+│
+├── assets/
+│   ├── banner.png
+│   ├── demo.gif
+│   ├── home.png
+│   ├── comparison.png
+│   ├── review.png
+│   └── recommendation.png
 │
 ├── services/
 │   ├── product_search.py
@@ -120,8 +166,8 @@ ai-shopping-assistant/
 │   ├── recommendation_tab.py
 │   └── assistant_mode.py
 │
-├── data/
-│   └── reviews.json
+└── data/
+    └── reviews.json
 ```
 
 ---
@@ -131,14 +177,14 @@ ai-shopping-assistant/
 ## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/ai-shopping-assistant.git
+git clone https://github.com/akashbharangar/ai-shopping-assistant.git
 
 cd ai-shopping-assistant
 ```
 
 ---
 
-## 2. Create Virtual Environment
+## 2. Create a Virtual Environment
 
 ### Windows
 
@@ -166,7 +212,9 @@ pip install -r requirements.txt
 
 ---
 
-## 4. Create `.env`
+## 4. Configure Environment Variables
+
+Create a `.env` file using `.env.example`.
 
 ```env
 GROQ_API_KEY=your_groq_api_key
@@ -181,119 +229,82 @@ MODEL_NAME=llama-3.3-70b-versatile
 streamlit run app.py
 ```
 
----
+Open:
 
-# 🐳 Run with Docker
-
-Build the image
-
-```bash
-docker build -t ai-shopping-assistant .
-```
-
-Run the container
-
-```bash
-docker run -p 8501:8501 --env-file .env ai-shopping-assistant
-```
-
-Open
-
-```
+```text
 http://localhost:8501
 ```
 
 ---
 
-# ⚙️ How It Works
+# 🐳 Docker
 
-### Step 1 — Product Search
+Build the Docker image:
 
-The application searches for products based on the user's query.
-
-↓
-
-### Step 2 — Review Analysis
-
-Customer reviews are summarized using an LLM to extract:
-
-* Summary
-* Pros
-* Cons
-* Overall sentiment
-
-↓
-
-### Step 3 — Product Comparison
-
-The selected products are compared using AI, highlighting strengths and weaknesses.
-
-↓
-
-### Step 4 — Recommendation
-
-The assistant recommends the most suitable product based on the user's preferences and the analyzed product data.
-
----
-
-# 📖 Example Workflow
-
+```bash
+docker build -t ai-shopping-assistant .
 ```
-Search Product
 
-↓
+Run the container:
 
-Compare Products
-
-↓
-
-Analyze Reviews
-
-↓
-
-AI Recommendation
-
-↓
-
-Best Product
+```bash
+docker run -p 8501:8501 --env-file .env ai-shopping-assistant
 ```
 
 ---
 
-# 📌 Skills Demonstrated
+# 📌 Example Use Case
 
+Suppose a user wants to buy a gaming laptop.
+
+The assistant:
+
+* Searches available products
+* Analyzes customer reviews
+* Summarizes strengths and weaknesses
+* Compares multiple products
+* Generates a personalized recommendation
+
+All powered by an LLM.
+
+---
+
+# 💡 Skills Demonstrated
+
+* Generative AI
 * Large Language Models (LLMs)
 * LangChain
+* Groq API
 * Prompt Engineering
-* AI Pipelines
+* AI Workflow Orchestration
+* Product Recommendation Systems
+* Review Analysis
 * Structured JSON Outputs
-* Service-Oriented Architecture
-* Streamlit
+* Streamlit Application Development
 * Docker
-* Environment Variable Management
-* Python Project Organization
+* Python Project Architecture
 
 ---
 
-# 🔮 Future Improvements
+# 🔮 Future Scope
 
 * Real e-commerce API integration
-* Live pricing data
+* Multi-vendor product search
 * Authentication
 * Wishlist support
-* Shopping history
+* Purchase history
 * Multi-language support
 
 ---
 
 # 🤝 Contributing
 
-Contributions are welcome!
+Contributions are welcome.
 
 1. Fork the repository
 2. Create a feature branch
 3. Commit your changes
-4. Push to your branch
+4. Push the branch
 5. Open a Pull Request
 
 ---
@@ -302,15 +313,21 @@ Contributions are welcome!
 
 This project is licensed under the MIT License.
 
+See the **LICENSE** file for details.
+
 ---
 
 # 👨‍💻 Author
 
-**Akash Bharangar**
+### Akash Bharangar
 
-AI Engineer | GenAI Engineer
+**AI Engineer | GenAI Engineer**
 
 * GitHub: https://github.com/akashbharangar
 * LinkedIn: https://www.linkedin.com/in/akash-bharangar-757440186/
 
-If you found this project useful, consider giving it a ⭐.
+---
+
+<p align="center">
+⭐ If you found this project helpful, consider starring the repository!
+</p>
