@@ -2,9 +2,11 @@ import streamlit as st
 
 from ui.sidebar import render_sidebar
 from ui.product_card import render_product_cards
+from ui.assistant_mode import render_assistant_mode
 
 from services.product_search import search_products
 from services.shopping_pipeline import shopping_pipeline
+
 
 st.set_page_config(
     page_title="AI Shopping Assistant",
@@ -85,56 +87,4 @@ if mode == "Developer Mode":
 
 else:
 
-    st.subheader("🤖 AI Shopping Assistant")
-
-    query = st.text_input(
-        "Product",
-        placeholder="Gaming Laptop"
-    )
-
-    profile = st.text_area(
-        "Tell AI about yourself",
-        placeholder="College student, budget ₹80k..."
-    )
-
-    if st.button("Ask Assistant", use_container_width=True):
-
-        with st.spinner("Thinking..."):
-
-            result = shopping_pipeline(
-                query,
-                profile
-            )
-
-        if result is None:
-
-            st.warning("No matching products found.")
-
-        else:
-
-            recommendation = result["recommendation"]
-            comparison = result["comparison"]
-
-            st.success(
-                recommendation["recommended_product"]
-            )
-
-            st.write(
-                recommendation["reason"]
-            )
-
-            st.progress(
-                recommendation["confidence"] / 100
-            )
-
-            st.caption(
-                f"Confidence: {recommendation['confidence']}%"
-            )
-
-            st.divider()
-
-            st.subheader("Comparison Summary")
-
-            st.write(
-                comparison["summary"]
-            )
+    render_assistant_mode()
