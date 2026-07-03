@@ -19,26 +19,40 @@
 <b>AI-powered shopping assistant that compares products, analyzes customer reviews, and delivers personalized recommendations using Groq, LangChain, and Streamlit.</b>
 </p>
 
+<p align="center">
+
+### 🚀 Live Demo
+
+**https://shopping-assistant-ai.streamlit.app/**
+
+</p>
+
 ---
 
-## ✨ Features
+# ✨ Features
 
 * 🔍 Search products from a product API
 * ⚖️ AI-powered product comparison
-* 📝 Customer review summarization
+* 📝 AI review summarization
 * ✅ Automatic Pros & Cons extraction
 * 📊 Sentiment analysis
-* 🤖 Personalized AI recommendations
-* 🧠 End-to-end shopping pipeline
-* 🎨 Professional Streamlit UI
-* 🐳 Docker support
+* 🤖 Personalized product recommendations
+* 🧠 End-to-end AI shopping pipeline
+* 🎨 Professional Streamlit interface
+* 🐳 Dockerized for easy deployment
 
 ---
 
 # 🎬 Demo
 
+## 🌐 Live Application
+
+**https://shopping-assistant-ai.streamlit.app/**
+
+## 🎥 Demo GIF
+
 <p align="center">
-<img src="assets/demo.gif" width="90%">
+  <img src="assets/demo.gif" width="95%">
 </p>
 
 ---
@@ -49,13 +63,13 @@
 | -------------------- | -------------------------- |
 | ![](assets/home.png) | ![](assets/comparison.png) |
 
-| Review Analysis        | Recommendation                 |
+| Review Analysis        | AI Recommendation              |
 | ---------------------- | ------------------------------ |
 | ![](assets/review.png) | ![](assets/recommendation.png) |
 
 ---
 
-# 🏗 Architecture
+# 🏗️ Architecture
 
 ```text
                            User
@@ -75,16 +89,16 @@
         ┌──────────────┼──────────────┐
         ▼              ▼              ▼
 
- Product Search   Review Analysis   Comparison
+ Product Search   Review Analysis   Product Comparison
 
         └──────────────┼──────────────┘
                        ▼
 
-            Recommendation Engine
+          Recommendation Engine
 
                        ▼
 
-                 Groq LLM (LangChain)
+               Groq LLM (LangChain)
 ```
 
 ---
@@ -114,15 +128,15 @@ Display Best Product
 
 # 🧠 Tech Stack
 
-| Category         | Technology         |
-| ---------------- | ------------------ |
-| Language         | Python 3.11        |
-| LLM              | Groq               |
-| Framework        | LangChain          |
-| Frontend         | Streamlit          |
-| Containerization | Docker             |
-| Prompting        | Prompt Engineering |
-| Data Format      | JSON               |
+| Category           | Technology        |
+| ------------------ | ----------------- |
+| Language           | Python 3.11       |
+| LLM                | Groq              |
+| Framework          | LangChain         |
+| Frontend           | Streamlit         |
+| Containerization   | Docker            |
+| Prompt Engineering | LangChain Prompts |
+| Data Format        | JSON              |
 
 ---
 
@@ -140,8 +154,8 @@ ai-shopping-assistant/
 │── Dockerfile
 │── .dockerignore
 │── .env.example
-│── README.md
 │── LICENSE
+│── README.md
 │
 ├── assets/
 │   ├── banner.png
@@ -214,7 +228,7 @@ pip install -r requirements.txt
 
 ## 4. Configure Environment Variables
 
-Create a `.env` file using `.env.example`.
+Create a `.env` file from `.env.example`.
 
 ```env
 GROQ_API_KEY=your_groq_api_key
@@ -229,7 +243,7 @@ MODEL_NAME=llama-3.3-70b-versatile
 streamlit run app.py
 ```
 
-Open:
+Visit:
 
 ```text
 http://localhost:8501
@@ -239,33 +253,49 @@ http://localhost:8501
 
 # 🐳 Docker
 
-Build the Docker image:
+### Build the Docker Image
 
 ```bash
 docker build -t ai-shopping-assistant .
 ```
 
-Run the container:
+### Run the Container
 
 ```bash
 docker run -p 8501:8501 --env-file .env ai-shopping-assistant
 ```
 
+Then open:
+
+```text
+http://localhost:8501
+```
+
+---
+
+# 🌍 Deployment
+
+The application is deployed on **Streamlit Community Cloud**.
+
+### Live Demo
+
+**https://shopping-assistant-ai.streamlit.app/**
+
 ---
 
 # 📌 Example Use Case
 
-Suppose a user wants to buy a gaming laptop.
+A user wants to buy a gaming laptop.
 
 The assistant:
 
-* Searches available products
+* Searches relevant products
 * Analyzes customer reviews
-* Summarizes strengths and weaknesses
+* Extracts key pros and cons
 * Compares multiple products
 * Generates a personalized recommendation
 
-All powered by an LLM.
+All powered by a Large Language Model.
 
 ---
 
@@ -274,11 +304,11 @@ All powered by an LLM.
 * Generative AI
 * Large Language Models (LLMs)
 * LangChain
-* Groq API
+* Groq API Integration
 * Prompt Engineering
 * AI Workflow Orchestration
 * Product Recommendation Systems
-* Review Analysis
+* Customer Review Analysis
 * Structured JSON Outputs
 * Streamlit Application Development
 * Docker
@@ -288,7 +318,7 @@ All powered by an LLM.
 
 # 🔮 Future Scope
 
-* Real e-commerce API integration
+* Integration with real e-commerce APIs
 * Multi-vendor product search
 * Authentication
 * Wishlist support
@@ -299,10 +329,10 @@ All powered by an LLM.
 
 # 🤝 Contributing
 
-Contributions are welcome.
+Contributions are welcome!
 
 1. Fork the repository
-2. Create a feature branch
+2. Create a new branch
 3. Commit your changes
 4. Push the branch
 5. Open a Pull Request
@@ -311,15 +341,15 @@ Contributions are welcome.
 
 # 📜 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
 
-See the **LICENSE** file for details.
+See the **LICENSE** file for more information.
 
 ---
 
 # 👨‍💻 Author
 
-### Akash Bharangar
+## Akash Bharangar
 
 **AI Engineer | GenAI Engineer**
 
@@ -329,5 +359,5 @@ See the **LICENSE** file for details.
 ---
 
 <p align="center">
-⭐ If you found this project helpful, consider starring the repository!
+⭐ If you found this project useful, consider giving it a star!
 </p>
