@@ -1,57 +1,140 @@
 import streamlit as st
 
+from ui.sidebar import render_sidebar
+from ui.product_card import render_product_cards
+
 from services.product_search import search_products
-from services.product_compare import compare_products
+from services.shopping_pipeline import shopping_pipeline
 
 st.set_page_config(
     page_title="AI Shopping Assistant",
     page_icon="🛒",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
+mode = render_sidebar()
+
 st.title("🛒 AI Shopping Assistant")
+st.caption(
+    "Compare products, analyze reviews and get AI-powered recommendations."
+)
 
-query = st.text_input("Search for products")
+# Initialize products safely
+products = st.session_state.get("products", [])
 
-if st.button("Search"):
+# =====================================================
+# Developer Mode
+# =====================================================
 
-    products = search_products(query)
+if mode == "Developer Mode":
 
-    if not products:
-        st.warning("No products found.")
+    query = st.text_input(
+        "🔍 Search Products",
+        placeholder="Example: phone, laptop, perfume..."
+    )
 
-    else:
+    if st.button("Search", use_container_width=True):
 
-        st.session_state["products"] = products
+        if query.strip():
 
-if "products" in st.session_state:
+            products = search_products(query)
 
-    st.subheader("Search Results")
+            if products:
+                st.session_state["products"] = products
+            else:
+                st.warning("No products found.")
+                st.session_state.pop("products", None)
 
-    products = st.session_state["products"]
+        else:
+            st.warning("Please enter a search query.")
 
-    selected = []
+    products = st.session_state.get("products", [])
 
-    for index, product in enumerate(products):
+    if products:
 
-        if st.checkbox(product["title"], key=index):
+        st.divider()
 
-            selected.append(product)
+        render_product_cards(products)
 
-    if len(selected) >= 2:
+        st.divider()
 
-        if st.button("Compare Selected Products"):
+        comparison_tab, review_tab, recommendation_tab = st.tabs(
+            [
+                "⚖ Comparison",
+                "📝 Reviews",
+                "🤖 Recommendation"
+            ]
+        )
 
-            with st.spinner("Comparing..."):
+        with comparison_tab:
+            from ui.comparison_tab import render_comparison_tab
+            render_comparison_tab(products)
 
-                result = compare_products(selected)
+        with review_tab:
+            from ui.review_tab import render_review_tab
+            render_review_tab(products)
 
-            st.markdown(result)
+        with recommendation_tab:
+            from ui.recommendation_tab import render_recommendation_tab
+            render_recommendation_tab(products)
 
-    elif len(selected) == 1:
+# =====================================================
+# Assistant Mode
+# =====================================================
 
-        st.info("Select one more product.")
+else:
 
-    else:
+    st.subheader("🤖 AI Shopping Assistant")
 
-        st.info("Select at least two products.")
+    query = st.text_input(
+        "Product",
+        placeholder="Gaming Laptop"
+    )
+
+    profile = st.text_area(
+        "Tell AI about yourself",
+        placeholder="College student, budget ₹80k..."
+    )
+
+    if st.button("Ask Assistant", use_container_width=True):
+
+        with st.spinner("Thinking..."):
+
+            result = shopping_pipeline(
+                query,
+                profile
+            )
+
+        if result is None:
+
+            st.warning("No matching products found.")
+
+        else:
+
+            recommendation = result["recommendation"]
+            comparison = result["comparison"]
+
+            st.success(
+                recommendation["recommended_product"]
+            )
+
+            st.write(
+                recommendation["reason"]
+            )
+
+            st.progress(
+                recommendation["confidence"] / 100
+            )
+
+            st.caption(
+                f"Confidence: {recommendation['confidence']}%"
+            )
+
+            st.divider()
+
+            st.subheader("Comparison Summary")
+
+            st.write(
+                comparison["summary"]
+            )

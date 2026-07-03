@@ -1,16 +1,23 @@
 import json
 
-from llm import invoke_llm
-from prompts import COMPARISON_PROMPT
+from chains import create_json_chain
+
+from prompts import (
+    SYSTEM_PROMPT,
+    COMPARISON_PROMPT
+)
+
+chain = create_json_chain(COMPARISON_PROMPT)
 
 
-def compare_products(products):
+def compare_products(products: list):
+    """
+    Compare multiple products using the LLM.
+    """
 
-    prompt = COMPARISON_PROMPT.format(
-        products=json.dumps(products, indent=2)
-    )
-
-    return invoke_llm(
-        system_prompt="You are an expert shopping assistant.",
-        user_prompt=prompt
+    return chain.invoke(
+        {
+            "system_prompt": SYSTEM_PROMPT,
+            "products": json.dumps(products, indent=2)
+        }
     )
