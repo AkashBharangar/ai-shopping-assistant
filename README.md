@@ -43,13 +43,7 @@
 
 ---
 
-# 🎬 Demo
-
-## 🌐 Live Application
-
-**https://shopping-assistant-ai.streamlit.app/**
-
-## 🎥 Demo GIF
+# 🎬 Demo GIF
 
 <p align="center">
   <img src="assets/demo.gif" width="95%">
